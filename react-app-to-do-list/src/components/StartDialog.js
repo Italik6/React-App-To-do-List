@@ -1,0 +1,39 @@
+import React, { Component } from 'react';
+import './StartDialog.css';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+
+export default class StartDialog extends Component {
+    constructor(props) {
+        super(props)
+        this.state = { errorText: '', value: props.value, open:true }
+      }
+  
+      handleSubmit = (event) => {
+        let password = this.refs.myPasswordValue.input.value;
+
+          if(password === "12345"){
+                this.setState({ errorText: '' })
+                this.setState({open: false});
+          } else if (password !== "12345" && password !== "") {
+                this.setState({ errorText: "Password is incorrect" })
+          } else if (password === ""){
+                this.setState({ errorText: "Password is required" })
+          }
+      };
+
+  render() {
+    const actions = [
+        <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} />,
+    ];
+
+    return (
+        <Dialog title="Welcome to the React App!" actions={actions} modal={true} open={this.state.open} >
+            <p className="StartDialog-subheader">To use the application it is necessary to enter the password.<br/>
+            (default password: 12345)</p>
+            <TextField errorText={this.state.errorText} hintText="Password Field" floatingLabelText="Password" type="password" ref="myPasswordValue" />
+        </Dialog>
+    );
+  }
+}
