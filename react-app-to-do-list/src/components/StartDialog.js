@@ -31,9 +31,9 @@ export default class StartDialog extends Component {
         }
       }
 
-  render() {
+render() {
     const actions = [
-        <FlatButton label="Submit" primary={true} onClick={this.handleSubmit}  />,
+        <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} />,
     ];
 
     return (
