@@ -30,7 +30,7 @@ export default class Home extends Component {
   return (
       <div>
         <StartDialog />
-        <AddTaskDialog open={this.state.open}  actions={actions}/>
+        <AddTaskDialog open={this.state.open} actions={actions}/>
         <FloatingActionButton onClick={this.handleOpen} className="Home-AddButton">
           <ContentAdd />
         </FloatingActionButton>
