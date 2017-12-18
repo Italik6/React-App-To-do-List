@@ -7,26 +7,25 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+
+const date = new Date();
+
+console.log(typeof date);
+   
+console.log(date.toDateString());
 export default class AddTaskDialog extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: "High", textFieldValue: '', controlledDate: {} };
-    this.handleDate = this.handleDate.bind(this);
+    this.state = { value: "High", textFieldValue: '', controlledDate:  new Date() };
+    this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.handleChangeSelectField = this.handleChangeSelectField.bind(this);
   }
-
 
   handleTextFieldChange = (e) =>{
     this.setState({
         textFieldValue: e.target.value,
     });
-}
-
-  handleDate = (event, date) => {
-      this.setState({
-        date: date
-      })
   }
 
   handleChangeSelectField = (event, index, value) => {
@@ -67,7 +66,7 @@ export default class AddTaskDialog extends Component {
             <TableRow>
               <TableRowColumn>1</TableRowColumn>
               <TableRowColumn>{this.state.textFieldValue}</TableRowColumn>
-              <TableRowColumn>Data</TableRowColumn>
+              <TableRowColumn>{this.state.controlledDate.toDateString()}</TableRowColumn>
               <TableRowColumn>Timer</TableRowColumn>
               <TableRowColumn>{this.state.value}</TableRowColumn>
             </TableRow>
