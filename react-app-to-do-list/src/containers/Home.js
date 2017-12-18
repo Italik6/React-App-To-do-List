@@ -11,20 +11,20 @@ export default class Home extends Component {
     super(props);
     this.state = { open: false };
     this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleOpen = () => {
     this.setState({open: true});
   }
 
-  handleClose = () => {
+  handleSubmit = () => {
     this.setState({open: false});
   };
 
   render() {
     const actions = [
-      <FlatButton label="Ok" primary={true} keyboardFocused={true} onClick={this.handleClose} />,
+      <FlatButton label="Ok" primary={true} keyboardFocused={true} onClick={this.handleSubmit} />,
   ];
   
   return (
