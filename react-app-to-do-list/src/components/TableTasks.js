@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import TableContent from '../containers/TableContent';
+import { Table, TableHeader, TableHeaderColumn, TableRow, TableBody } from 'material-ui/Table';
 
 export default class TableTasks extends Component {
     render() {
@@ -16,13 +17,7 @@ export default class TableTasks extends Component {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableRowColumn>1</TableRowColumn>
-              <TableRowColumn>{this.props.textFieldValue}</TableRowColumn>
-              <TableRowColumn>{this.props.controlledDate}</TableRowColumn>
-              <TableRowColumn>{this.props.timer}</TableRowColumn>
-              <TableRowColumn>{this.props.priority}</TableRowColumn>
-            </TableRow>
+            <TableContent priority={this.props.priority} timer={this.props.timer} deadline={this.props.deadline} />
           </TableBody>
         </Table> 
       </div>
