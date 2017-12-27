@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TableTasks from '../components/TableTasks';
+import TableTasks from './TableTasks';
 import Dialog from 'material-ui/Dialog';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
