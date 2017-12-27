@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TableTasks from './TableTasks';
 import Dialog from 'material-ui/Dialog';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
@@ -53,11 +52,7 @@ export default class AddTaskDialog extends Component {
             <MenuItem value="Medium" primaryText="Medium" />
             <MenuItem value="Low" primaryText="Low" />
           </SelectField>
-        </Dialog>
-        <TableTasks nameTask={this.state.nameTask} 
-        deadline={this.state.deadline.toDateString()} 
-        priority={this.state.priority} 
-        timer={this.getTimeRemaining(this.state.deadline.toDateString()).days}/>
+        </Dialog>        
       </div>
     );
   }

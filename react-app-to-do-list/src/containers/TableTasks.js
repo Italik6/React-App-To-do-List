@@ -7,7 +7,7 @@ let testData = [
   { index:3, nameTask: "Make dinner", deadline: "Fri Dec 22 2017", timer: "12", priority: "High"},
 ]
 
-const testDataIteration = testData.map((task) => { 
+export const testDataIteration = testData.map((task) => { 
   return(
       <TableRow key={task.index}>
         <TableRowColumn>{task.index}</TableRowColumn>
@@ -19,7 +19,7 @@ const testDataIteration = testData.map((task) => {
   )
 }) 
 
-export default class TableTasks extends Component {
+export class TableTasks extends Component {
     render() {
       return (
       <div>
