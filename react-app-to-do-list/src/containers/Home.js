@@ -1,27 +1,13 @@
 import React, { Component } from "react";
 import StartDialog from './StartDialog';
 import Form from "./AddTaskDialog";
-import Table from "./TableTasks";
+import TableTasks from "./TableTasks";
 import { AddButton } from '../components/AddButton';
-
 class Home extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { open: false, index: null, nameTask:'', deadline: new Date(), priority:''};
-  //   this.handleOpen = this.handleOpen.bind(this);
-  //   this.handleSubmitAddTask = this.handleSubmitAddTask.bind(this);
-  // }
-  state = {
-    data: []
-  };
-
-  handleOpen = () => {
-    this.setState({open: true});
-  };
-
-  handleSubmitAddTask = () => {
-    // this.setState({open: false, nameTask: infoTask.nameTask, deadline: infoTask.deadline, priority: infoTask.priority});
-  };
+  constructor(props) {
+    super(props);
+    this.state = { index: null, nameTask:'', deadline: new Date(), priority:'', data: []};
+  }
 
   // Set up timer
   getTimeRemaining = function (endtime){
@@ -36,31 +22,34 @@ class Home extends Component {
     return (
       <div>
       <StartDialog />
-      <AddButton onClick={this.handleOpen}/>
           <Form
             onSubmit={submission =>
               this.setState({
                 data: [...this.state.data, submission]
               })}
           />
-          <Table
+          <TableTasks
             data={this.state.data}
             header={[
               {
-                name: "First name",
-                prop: "firstName"
+                name: "No",
+                prop: "no"
               },
               {
-                name: "Last name",
-                prop: "lastName"
+                name: "Task",
+                prop: "task"
               },
               {
-                name: "Username",
-                prop: "username"
+                name: "Deadline",
+                prop: "deadline"
               },
               {
-                name: "Email",
-                prop: "email"
+                name: "Timer",
+                prop: "timer"
+              },
+              {
+                name: "Priority",
+                prop: "priority"
               }
             ]}
           />
