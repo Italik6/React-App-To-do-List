@@ -1,26 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Table, TableHeader, TableHeaderColumn, TableRow, TableBody, TableRowColumn } from 'material-ui/Table';
 
-let testData = [
-  { index:1, nameTask: "Make breakfast", deadline: "Fri Dec 22 2017", timer: "12", priority: "High"},
-  { index:2, nameTask: "Make lunch", deadline: "Fri Dec 22 2017", timer: "12", priority: "High"},
-  { index:3, nameTask: "Make dinner", deadline: "Fri Dec 22 2017", timer: "12", priority: "High"},
-]
-
-export const testDataIteration = testData.map((task) => { 
-  return(
-      <TableRow key={task.index}>
-        <TableRowColumn>{task.index}</TableRowColumn>
-        <TableRowColumn>{task.nameTask}</TableRowColumn>
-        <TableRowColumn>{task.deadline}</TableRowColumn>
-        <TableRowColumn>{task.timer}</TableRowColumn>
-        <TableRowColumn>{task.priority}</TableRowColumn>
-      </TableRow>
-  )
-}) 
-
-export class TableTasks extends Component {
-    render() {
+export const TableTasks = (props) => {
       return (
       <div>
          <Table>
@@ -34,10 +15,15 @@ export class TableTasks extends Component {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {testDataIteration}
+            <TableRow>
+                <TableRowColumn>{props.index}</TableRowColumn>
+                <TableRowColumn>{props.nameTask}</TableRowColumn>
+                <TableRowColumn>{props.deadline}</TableRowColumn>
+                <TableRowColumn>{props.timer}</TableRowColumn>
+                <TableRowColumn>{props.priority}</TableRowColumn>
+            </TableRow>
           </TableBody>
         </Table> 
       </div>
-      );
-    }
-  }
+    )
+}

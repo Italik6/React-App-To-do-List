@@ -1,31 +1,14 @@
 import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import StartDialog from './StartDialog';
-import AddTaskDialog from './AddTaskDialog';
+import { AddTaskDialog, infoTask } from './AddTaskDialog';
 import { AddButton } from '../components/AddButton';
-import { TableTasks, testDataIteration } from './TableTasks';
+import { TableTasks } from './TableTasks';
 
-let testData = [
-  { index:1, nameTask: "Make breakfast", deadline: "Fri Dec 22 2017", timer: "12", priority: "High"},
-  { index:2, nameTask: "Make lunch", deadline: "Fri Dec 22 2017", timer: "12", priority: "High"},
-  { index:3, nameTask: "Make dinner", deadline: "Fri Dec 22 2017", timer: "12", priority: "High"},
-]
-
-// export const testDataIteration = testData.map((task) => { 
-//   return(
-//       <TableRow key={task.index}>
-//         <TableRowColumn>{task.index}</TableRowColumn>
-//         <TableRowColumn>{task.nameTask}</TableRowColumn>
-//         <TableRowColumn>{task.deadline}</TableRowColumn>
-//         <TableRowColumn>{task.timer}</TableRowColumn>
-//         <TableRowColumn>{task.priority}</TableRowColumn>
-//       </TableRow>
-//   )
-// }) 
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: false };
+    this.state = { open: false, index: null, nameTask:'', deadline: new Date(), priority:''};
     this.handleOpen = this.handleOpen.bind(this);
     this.handleSubmitAddTask = this.handleSubmitAddTask.bind(this);
   }
@@ -35,9 +18,17 @@ export default class Home extends Component {
   }
 
   handleSubmitAddTask = () => {
-    this.setState({open: false});
-    // testDataIteration.push({ index:3, nameTask: "Make dinner", deadline: "Fri Dec 22 2017", timer: "12", priority: "High"})
+    this.setState({open: false, nameTask: infoTask.nameTask, deadline: infoTask.deadline, priority: infoTask.priority});
   };
+
+  // Set up timer
+  getTimeRemaining = function (endtime){
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var days = Math.floor( t/(1000*60*60*24) + 1 );
+    return {
+      'days': days
+    };
+  }
 
   render() {
     const actions = [
@@ -49,11 +40,7 @@ export default class Home extends Component {
         <StartDialog />
         <AddButton onClick={this.handleOpen}/>
         <AddTaskDialog open={this.state.open} actions={actions}/>
-        <TableTasks />
-        {/* <TableTasks nameTask={this.state.nameTask} 
-        deadline={this.state.deadline.toDateString()} 
-        priority={this.state.priority} 
-        timer={this.getTimeRemaining(this.state.deadline.toDateString()).days}/> */}
+        <TableTasks index={this.state.index} nameTask={this.state.nameTask} deadline={this.state.deadline.toDateString()} timer={this.getTimeRemaining(this.state.deadline.toDateString()).days} priority={this.state.priority}/>
       </div>
     );
   }

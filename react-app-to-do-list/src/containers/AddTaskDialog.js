@@ -5,7 +5,8 @@ import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
-export default class AddTaskDialog extends Component {
+export const infoTask = {};
+export class AddTaskDialog extends Component {
   constructor(props) {
     super(props);
     this.state = { priority: "High", nameTask: 'Task', deadline: new Date() };
@@ -16,29 +17,23 @@ export default class AddTaskDialog extends Component {
 
   handleTextFieldChange = (event) =>{
     this.setState({
-        nameTask: event.target.value,
+        nameTask: event.target.value,  
     });
+    infoTask.nameTask = event.target.value
   }
 
   handleChangeSelectField = (event, index, priority) => {
     this.setState(
         {priority}
       );
+    infoTask.priority = priority
   }
 
   handleChangeDate = (event, date) => {
     this.setState({
       deadline: date,
     });
-  }
-
-// Set up timer
-  getTimeRemaining = function (endtime){
-    var t = Date.parse(endtime) - Date.parse(new Date());
-    var days = Math.floor( t/(1000*60*60*24) + 1 );
-    return {
-      'days': days
-    };
+    infoTask.deadline = date
   }
 
   render() {
