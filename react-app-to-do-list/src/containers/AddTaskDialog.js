@@ -17,11 +17,6 @@ export default class Form extends React.Component {
     this.handleOpen = this.handleOpen.bind(this);
   }
 
-  state = {
-    nameTask: "",
-    nameTaskError: ""
-  };
-
   handleTextFieldChange = (event) =>{
     this.setState({
         nameTask: event.target.value,  
@@ -36,8 +31,9 @@ export default class Form extends React.Component {
 
   handleChangeDate = (event, date) => {
     this.setState({
-      deadline: date,   
+      deadline: date 
     });
+    console.log(this.state.deadline.toDateString())
   }
 
   validate = () => {
@@ -63,6 +59,7 @@ export default class Form extends React.Component {
     const err = this.validate();
     this.setState({open: false});
 
+    // this.deadline.toDateString();
     if (!err) {
       this.props.onSubmit(this.state);
       // clear form
@@ -105,6 +102,8 @@ export default class Form extends React.Component {
           errorText={this.state.nameTaskError}
           floatingLabelFixed
         />
+        {/* <br/>
+        <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate}/> */}
         <br/>
         <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField} >
             <MenuItem value="High" primaryText="High" />

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from "material-ui/Table";
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
 
 const row = (x, i, header) =>
   <TableRow key={`tr-${i}`}>

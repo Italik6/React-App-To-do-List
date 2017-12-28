@@ -39,6 +39,10 @@ class Home extends Component {
                 name: "Task",
                 prop: "nameTask"
               },
+              // {
+              //   name: "Deadline",
+              //   prop: "deadline"
+              // },
               {
                 name: "Priority",
                 prop: "priority"
