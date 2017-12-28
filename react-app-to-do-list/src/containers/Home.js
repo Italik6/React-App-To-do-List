@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
-import FlatButton from 'material-ui/FlatButton';
+import React, { Component } from "react";
 import StartDialog from './StartDialog';
-import { AddTaskDialog, infoTask } from './AddTaskDialog';
+import Form from "./AddTaskDialog";
+import Table from "./TableTasks";
 import { AddButton } from '../components/AddButton';
-import { TableTasks } from './TableTasks';
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { open: false, index: null, nameTask:'', deadline: new Date(), priority:''};
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleSubmitAddTask = this.handleSubmitAddTask.bind(this);
-  }
+class Home extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { open: false, index: null, nameTask:'', deadline: new Date(), priority:''};
+  //   this.handleOpen = this.handleOpen.bind(this);
+  //   this.handleSubmitAddTask = this.handleSubmitAddTask.bind(this);
+  // }
+  state = {
+    data: []
+  };
 
   handleOpen = () => {
     this.setState({open: true});
-  }
+  };
 
   handleSubmitAddTask = () => {
-    this.setState({open: false, nameTask: infoTask.nameTask, deadline: infoTask.deadline, priority: infoTask.priority});
+    // this.setState({open: false, nameTask: infoTask.nameTask, deadline: infoTask.deadline, priority: infoTask.priority});
   };
 
   // Set up timer
@@ -31,17 +33,40 @@ export default class Home extends Component {
   }
 
   render() {
-    const actions = [
-      <FlatButton label="Ok" primary={true} keyboardFocused={true} onClick={this.handleSubmitAddTask} />
-  ];
-  
-  return (
+    return (
       <div>
-        <StartDialog />
-        <AddButton onClick={this.handleOpen}/>
-        <AddTaskDialog open={this.state.open} actions={actions}/>
-        <TableTasks index={this.state.index} nameTask={this.state.nameTask} deadline={this.state.deadline.toDateString()} timer={this.getTimeRemaining(this.state.deadline.toDateString()).days} priority={this.state.priority}/>
-      </div>
+      <StartDialog />
+      <AddButton onClick={this.handleOpen}/>
+          <Form
+            onSubmit={submission =>
+              this.setState({
+                data: [...this.state.data, submission]
+              })}
+          />
+          <Table
+            data={this.state.data}
+            header={[
+              {
+                name: "First name",
+                prop: "firstName"
+              },
+              {
+                name: "Last name",
+                prop: "lastName"
+              },
+              {
+                name: "Username",
+                prop: "username"
+              },
+              {
+                name: "Email",
+                prop: "email"
+              }
+            ]}
+          />
+          </div>
     );
   }
 }
+
+export default Home;

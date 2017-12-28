@@ -1,29 +1,34 @@
-import React from 'react';
-import { Table, TableHeader, TableHeaderColumn, TableRow, TableBody, TableRowColumn } from 'material-ui/Table';
+import React from "react";
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from "material-ui/Table";
 
-export const TableTasks = (props) => {
-      return (
-      <div>
-         <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHeaderColumn>No</TableHeaderColumn>
-              <TableHeaderColumn>Name</TableHeaderColumn>
-              <TableHeaderColumn>Deadline</TableHeaderColumn>
-              <TableHeaderColumn>Timer</TableHeaderColumn>
-              <TableHeaderColumn>Priority</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-                <TableRowColumn>{props.index}</TableRowColumn>
-                <TableRowColumn>{props.nameTask}</TableRowColumn>
-                <TableRowColumn>{props.deadline}</TableRowColumn>
-                <TableRowColumn>{props.timer}</TableRowColumn>
-                <TableRowColumn>{props.priority}</TableRowColumn>
-            </TableRow>
-          </TableBody>
-        </Table> 
-      </div>
-    )
-}
+const row = (x, i, header) =>
+  <TableRow key={`tr-${i}`}>
+    {header.map((y, k) =>
+      <TableRowColumn key={`trc-${k}`}>
+        {x[y.prop]}
+      </TableRowColumn>
+    )}
+  </TableRow>;
+
+export default ({ data, header }) =>
+  <Table>
+    <TableHeader>
+      <TableRow>
+        {header.map((x, i) =>
+          <TableHeaderColumn key={`thc-${i}`}>
+            {x.name}
+          </TableHeaderColumn>
+        )}
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {data.map((x, i) => row(x, i, header))}
+    </TableBody>
+  </Table>;
