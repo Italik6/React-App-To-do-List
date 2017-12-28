@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import StartDialog from './StartDialog';
 import Form from "./AddTaskDialog";
-import TableTasks from "./TableTasks";
+import Table from "./TableTasks";
 import { AddButton } from '../components/AddButton';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { index: null, nameTask:'', deadline: new Date(), priority:'', data: []};
+    this.state = { data: []};
   }
 
   // Set up timer
@@ -28,7 +28,7 @@ class Home extends Component {
                 data: [...this.state.data, submission]
               })}
           />
-          <TableTasks
+          <Table
             data={this.state.data}
             header={[
               {
@@ -37,15 +37,7 @@ class Home extends Component {
               },
               {
                 name: "Task",
-                prop: "task"
-              },
-              {
-                name: "Deadline",
-                prop: "deadline"
-              },
-              {
-                name: "Timer",
-                prop: "timer"
+                prop: "nameTask"
               },
               {
                 name: "Priority",
@@ -53,7 +45,7 @@ class Home extends Component {
               }
             ]}
           />
-          </div>
+      </div>
     );
   }
 }
