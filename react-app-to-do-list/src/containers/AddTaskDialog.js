@@ -21,7 +21,7 @@ export default class AddTaskDialog extends Component {
   }
 
   handleChangeSelectField = (event, index, priority) => {
-      this.setState(
+    this.setState(
         {priority}
       );
   }
@@ -30,7 +30,7 @@ export default class AddTaskDialog extends Component {
     this.setState({
       deadline: date,
     });
-  };
+  }
 
 // Set up timer
   getTimeRemaining = function (endtime){

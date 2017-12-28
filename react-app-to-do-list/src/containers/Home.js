@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import StartDialog from './StartDialog';
 import AddTaskDialog from './AddTaskDialog';
-import AddButton from './AddButton';
+import { AddButton } from '../components/AddButton';
 import { TableTasks, testDataIteration } from './TableTasks';
 
 let testData = [
@@ -47,8 +47,8 @@ export default class Home extends Component {
   return (
       <div>
         <StartDialog />
-        <AddTaskDialog open={this.state.open} actions={actions}/>
         <AddButton onClick={this.handleOpen}/>
+        <AddTaskDialog open={this.state.open} actions={actions}/>
         <TableTasks />
         {/* <TableTasks nameTask={this.state.nameTask} 
         deadline={this.state.deadline.toDateString()} 
