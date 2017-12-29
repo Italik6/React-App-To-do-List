@@ -25,16 +25,15 @@ export default class AddTaskDialog extends React.Component {
 
   handleChangeDate = (event, date) => {
     this.setState({
-      deadline: date 
+      deadline: date
     });
-    console.log(this.state.deadline.toDateString())
   }
 
   validate = () => {
     let isError = false;
     const errors = {
       nameTaskError: "",
-    };
+  };
 
     // if (this.state.username.length < 5) {
     //   isError = true;
@@ -81,13 +80,6 @@ export default class AddTaskDialog extends React.Component {
       <form>
       <AddButton onClick={this.handleOpen} />
       <Dialog title="Add new task" actions={this.props.actions} modal={false} open={this.state.open} >
-        {/* 
-          <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate}/>
-          <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField} >
-            <MenuItem value="High" primaryText="High" />
-            <MenuItem value="Medium" primaryText="Medium" />
-            <MenuItem value="Low" primaryText="Low" />
-          </SelectField> */}
         <TextField
           name="nameTask"
           floatingLabelText="Task"
@@ -96,15 +88,15 @@ export default class AddTaskDialog extends React.Component {
           errorText={this.state.nameTaskError}
           floatingLabelFixed
         />
-        {/* <br/>
-        <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate}/> */}
+        <br/>
+        <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate}/>
         <br/>
         <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField} >
             <MenuItem value="High" primaryText="High" />
             <MenuItem value="Medium" primaryText="Medium" />
             <MenuItem value="Low" primaryText="Low" />
           </SelectField>
-        <br />
+        <br/>
         <RaisedButton label="Submit" onClick={e => this.onSubmit(e)} primary />
       </Dialog>  
       </form>

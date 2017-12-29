@@ -16,10 +16,12 @@ class Home extends Component {
       'days': days
     };
   }
+  
   handleSubmit = (submission) =>{
     this.setState({
     data: [...this.state.data, submission]
- })}
+ })
+}
 
   render() {
     return (
@@ -28,24 +30,7 @@ class Home extends Component {
           <AddTaskDialog onSubmit={this.handleSubmit} />
           <TableTasks
             data={this.state.data}
-            header={[
-              {
-                name: "No",
-                prop: "no"
-              },
-              {
-                name: "Task",
-                prop: "nameTask"
-              },
-              // {
-              //   name: "Deadline",
-              //   prop: "deadline"
-              // },
-              {
-                name: "Priority",
-                prop: "priority"
-              }
-            ]}
+            header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, { name: "Priority" }]}
           />
       </div>
     );

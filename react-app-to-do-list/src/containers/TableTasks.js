@@ -1,14 +1,21 @@
 import React from "react";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
 
-const row = (x, i, header) =>
-  <TableRow key={`tr-${i}`}>
-    {header.map((y, k) =>
-      <TableRowColumn key={`trc-${k}`}>
-        {x[y.prop]}
-      </TableRowColumn>
-    )}
-  </TableRow>;
+const row = (props, i) =>
+    <TableRow key={`thr-${i}`}>
+        <TableRowColumn>
+          {props.no}
+        </TableRowColumn>
+        <TableRowColumn>
+          {props.nameTask}
+        </TableRowColumn>
+        <TableRowColumn>
+          {props.deadline.toDateString()}
+        </TableRowColumn>
+        <TableRowColumn>
+          {props.priority}
+        </TableRowColumn>
+    </TableRow>;
 
 export default ({ data, header }) =>
   <Table>
