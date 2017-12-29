@@ -46,7 +46,13 @@ export default class AddTaskDialog extends React.Component {
     }
   }
 
-  onSubmit = e => {
+  handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+     this.handleSubmitTask(event);
+    }
+  }
+
+  handleSubmitTask = e => {
     e.preventDefault();
     const err = this.validate();
     this.setState({open: false});
@@ -85,15 +91,15 @@ export default class AddTaskDialog extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton label="Submit" primary={true} keyboardFocused={true} onClick={e => this.onSubmit(e)} />,
+      <FlatButton label="Submit" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitTask(e)} />,
     ];
 
     return (
       <form>
         <AddButton onClick={this.handleOpen} />
-        <Dialog title="Add new task" modal={false} open={this.state.open} actions={actions}>
-          <TextField floatingLabelText="Task" value={this.state.nameTask} onChange={e => this.handleTextFieldChange(e)} errorText={this.state.nameTaskError} />
-          <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate}/>
+        <Dialog title="Add new task" open={this.state.open} actions={actions}>
+          <TextField floatingLabelText="Task" value={this.state.nameTask} onChange={e => this.handleTextFieldChange(e)} errorText={this.state.nameTaskError} onKeyPress={this.handleKeyPress}/>
+          <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate} />
           <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField} >
               <MenuItem value="High" primaryText="High" />
               <MenuItem value="Medium" primaryText="Medium" />

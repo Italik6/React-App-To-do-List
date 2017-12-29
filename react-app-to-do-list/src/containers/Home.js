@@ -14,18 +14,14 @@ class Home extends Component {
  })
 }
 
-  render() {
+render() {
     return (
       <div>
         <StartDialog />
         <AddTaskDialog onSubmit={this.handleSubmit} />
-        <TableTasks
-          data={this.state.data}
-          header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }]}
-        />
+        <TableTasks data={this.state.data} header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }]} />
       </div>
     );
-  }
-}
+  }}
 
 export default Home;

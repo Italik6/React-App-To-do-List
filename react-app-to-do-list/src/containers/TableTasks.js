@@ -12,21 +12,21 @@ let getTimeRemaining = function (endtime){
 
 const row = (props, i, data) =>
     <TableRow key={`thr-${i}`}>
-        <TableRowColumn>
-          {i + 1 + '.'}
-        </TableRowColumn>
-        <TableRowColumn>
-          {props.nameTask}
-        </TableRowColumn>
-        <TableRowColumn>
-          {props.deadline.toDateString()}
-        </TableRowColumn>
-        <TableRowColumn>
-          {getTimeRemaining(props.deadline.toDateString()).days}
-        </TableRowColumn>
-        <TableRowColumn>
-          {props.priority}
-        </TableRowColumn>
+      <TableRowColumn>
+        {i + 1 + '.'}
+      </TableRowColumn>
+      <TableRowColumn>
+        {props.nameTask}
+      </TableRowColumn>
+      <TableRowColumn>
+        {props.deadline.toDateString()}
+      </TableRowColumn>
+      <TableRowColumn>
+        {getTimeRemaining(props.deadline.toDateString()).days}
+      </TableRowColumn>
+      <TableRowColumn>
+        {props.priority}
+      </TableRowColumn>
     </TableRow>;
 
 export default ({ data, header }) => 
