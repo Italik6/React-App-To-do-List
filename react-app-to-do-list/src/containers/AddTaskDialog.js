@@ -7,7 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import { AddButton } from '../components/AddButton';
 
-export default class Form extends React.Component {
+export default class AddTaskDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = { priority: '', nameTask: '', deadline: new Date(), open:false };
@@ -16,12 +16,6 @@ export default class Form extends React.Component {
     this.handleChangeSelectField = this.handleChangeSelectField.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
   }
-
-  handleTextFieldChange = (event) =>{
-    this.setState({
-        nameTask: event.target.value,  
-    });
-   }
   
   handleChangeSelectField = (event, index, priority) => {
       this.setState(
@@ -72,15 +66,15 @@ export default class Form extends React.Component {
     }
   };
 
-    handleTextFieldChange = (event) =>{
+  handleTextFieldChange = (event) =>{
         this.setState({
-            nameTask: event.target.value,  
-        });
-    }
+          nameTask: event.target.value,  
+    });
+  }
 
-    handleOpen = () => {
-      this.setState({open: true});
-    };
+  handleOpen = () => {
+     this.setState({open: true});
+  };
     
   render() {
     return (

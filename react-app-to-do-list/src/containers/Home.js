@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import StartDialog from './StartDialog';
-import Form from "./AddTaskDialog";
-import Table from "./TableTasks";
-import { AddButton } from '../components/AddButton';
+import AddTaskDialog from "./AddTaskDialog";
+import TableTasks from "./TableTasks";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -17,18 +16,17 @@ class Home extends Component {
       'days': days
     };
   }
+  handleSubmit = (submission) =>{
+    this.setState({
+    data: [...this.state.data, submission]
+ })}
 
   render() {
     return (
       <div>
       <StartDialog />
-          <Form
-            onSubmit={submission =>
-              this.setState({
-                data: [...this.state.data, submission]
-              })}
-          />
-          <Table
+          <AddTaskDialog onSubmit={this.handleSubmit} />
+          <TableTasks
             data={this.state.data}
             header={[
               {
