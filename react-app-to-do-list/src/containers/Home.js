@@ -7,15 +7,6 @@ class Home extends Component {
     super(props);
     this.state = { data: []};
   }
-
-  // Set up timer
-  getTimeRemaining = function (endtime){
-    var t = Date.parse(endtime) - Date.parse(new Date());
-    var days = Math.floor( t/(1000*60*60*24) + 1 );
-    return {
-      'days': days
-    };
-  }
   
   handleSubmit = (submission) =>{
     this.setState({
@@ -26,12 +17,12 @@ class Home extends Component {
   render() {
     return (
       <div>
-      <StartDialog />
-          <AddTaskDialog onSubmit={this.handleSubmit} />
-          <TableTasks
-            data={this.state.data}
-            header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, { name: "Priority" }]}
-          />
+        <StartDialog />
+        <AddTaskDialog onSubmit={this.handleSubmit} />
+        <TableTasks
+          data={this.state.data}
+          header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }]}
+        />
       </div>
     );
   }
