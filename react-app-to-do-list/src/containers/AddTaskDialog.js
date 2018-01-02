@@ -6,11 +6,12 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import FlatButton from 'material-ui/FlatButton';
 import { AddButton } from '../components/AddButton';
+import { Alert } from '../components/Alert';
 
 export default class AddTaskDialog extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { priority: 'Low', nameTask: '', deadline: new Date(), open:false };
+    this.state = { priority: 'Low', nameTask: '', deadline: new Date(), open:false, openAlert:false };
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.handleChangeSelectField = this.handleChangeSelectField.bind(this);
@@ -20,7 +21,7 @@ export default class AddTaskDialog extends React.Component {
   // Handlers
   handleChangeSelectField = (event, index, priority) => {
     this.setState(
-       {priority}
+      {priority}
     );
   }
 
@@ -28,6 +29,11 @@ export default class AddTaskDialog extends React.Component {
     this.setState({
       deadline: date
     });
+    if (this.state.deadline < new Date()) {
+      this.setState({
+        openAlert: true
+      })
+    }
   }
 
   handleTextFieldChange = (event) =>{
@@ -52,6 +58,12 @@ export default class AddTaskDialog extends React.Component {
     }
   }
 
+  handleCloseAlert = () =>{
+    this.setState({
+      openAlert: false
+    })
+  }
+
   handleSubmitTask = e => {
     e.preventDefault();
     const err = this.validate();
@@ -63,9 +75,7 @@ export default class AddTaskDialog extends React.Component {
       this.setState({
         nameTask: "",
         nameTaskError: "",
-        priority: "Low",
-        deadline: new Date(),
-        deadlineError: ""
+        priority: "Low"
       });
     }
   };
@@ -73,19 +83,13 @@ export default class AddTaskDialog extends React.Component {
   validate = () => {
     let isError = false;
     const errors = {
-      nameTaskError: "",
-      deadlineError: ""
+      nameTaskError: ""
   };
 
-  if (this.state.nameTask.length <= 2) {
+  if (this.state.nameTask.length < 2) {
       isError = true;
       errors.nameTaskError = "Name of task needs to be at least 3 characters long.";
       console.log(this.state.deadline)
-  }
-
-  if (this.state.deadline < new Date()) {
-    isError = true;
-    errors.nameTaskError = "Name of task needs to be at least 3 characters long.";
   }
 
   this.setState({
@@ -96,21 +100,23 @@ export default class AddTaskDialog extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton label="Submit" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitTask(e)} />
+      <FlatButton label="Submit" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitTask(e)} />,
+      <FlatButton label="Ok, got it!" primary={true} onClick={this.handleCloseAlert} />,
     ];
 
     return (
       <form>
         <AddButton onClick={this.handleOpen} />
-        <Dialog title="Add new task" open={this.state.open} actions={actions}>
+        <Dialog title="Add new task" open={this.state.open} actions={actions[0]}>
           <TextField floatingLabelText="Task" value={this.state.nameTask} onChange={e => this.handleTextFieldChange(e)} errorText={this.state.nameTaskError} onKeyPress={this.handleKeyPress}/>
-          <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate} errorText={this.state.deadlineError} />
+          <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate} />
           <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField} >
               <MenuItem value="High" primaryText="High" />
               <MenuItem value="Medium" primaryText="Medium" />
               <MenuItem value="Low" primaryText="Low" />
             </SelectField>
         </Dialog>  
+        <Alert open={this.state.openAlert} actions={actions[1]} alertStatement={"Time to complete the task has already passed. Change the date or keep curent one."}/>
       </form>
     );
   }
