@@ -2,6 +2,7 @@ import React from "react";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import './TableTasks.css';
 
   // Set up timer
@@ -13,11 +14,7 @@ let getTimeRemaining = function (endtime){
     };
   }
 
-  let handleDelete = () => {
-        console.log('dupa')
-    }
-
-const row = (props, i) =>
+const row = (props, i, handleDelete, handleEdit) =>
     <TableRow key={`thr-${i}`}>
       <TableRowColumn>
         {i + 1 + '.'}
@@ -34,14 +31,19 @@ const row = (props, i) =>
       <TableRowColumn>
         {props.priority}
       </TableRowColumn>
-      <TableRowColumn className="DeleteButton">
+      <TableRowColumn className="IconButton">
+        <IconButton>
+          <EditIcon onClick={handleEdit}/>
+        </IconButton>
+      </TableRowColumn>
+      <TableRowColumn className="IconButton">
         <IconButton>
           <DeleteIcon onClick={handleDelete}/>
         </IconButton>
       </TableRowColumn>
     </TableRow>;
 
-export const TableTasks = ({ data, header }) => 
+export const TableTasks = ({ data, header, handleDelete, handleEdit }) => 
   <Table>
     <TableHeader>
       <TableRow>
@@ -53,6 +55,6 @@ export const TableTasks = ({ data, header }) =>
       </TableRow>
     </TableHeader>
     <TableBody>
-      {data.map((x, i) => row(x, i))}
+      {data.map((x, i) => row(x, i, handleDelete, handleEdit))}
     </TableBody>
   </Table>;

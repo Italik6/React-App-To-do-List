@@ -29,8 +29,9 @@ export default class AddTaskDialog extends React.Component {
     this.setState({
       deadline: date
     });
-    if (this.state.deadline < new Date()) {
-      this.setState({
+    let today = new Date();
+    if (date < today) {
+      this.setState({       
         openAlert: true
       })
     }
@@ -75,7 +76,8 @@ export default class AddTaskDialog extends React.Component {
       this.setState({
         nameTask: "",
         nameTaskError: "",
-        priority: "Low"
+        priority: "Low",
+        deadline: new Date()
       });
     }
   };
