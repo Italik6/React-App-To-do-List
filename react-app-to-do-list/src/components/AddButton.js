@@ -5,8 +5,10 @@ import './AddButton.css';
 
 export const AddButton = (props) => {
       return (
-        <FloatingActionButton onClick={props.onClick} className="AddButton">
-          <ContentAdd />
-        </FloatingActionButton>
+        <div>
+          <FloatingActionButton onClick={props.onClick} className="AddButton">
+            <ContentAdd />
+          </FloatingActionButton>
+        </div>
     );
 }

@@ -19,7 +19,7 @@ render() {
       <div>
         <StartDialog />
         <AddTaskDialog onSubmit={this.handleSubmit} />
-        <TableTasks data={this.state.data} header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }]} />
+        <TableTasks data={this.state.data} header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }, { name: "Delete" }]} />
       </div>
     );
   }}

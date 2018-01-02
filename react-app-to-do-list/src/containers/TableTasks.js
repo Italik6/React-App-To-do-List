@@ -1,5 +1,8 @@
 import React from "react";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
+import './TableTasks.css';
 
   // Set up timer
 let getTimeRemaining = function (endtime){
@@ -26,6 +29,11 @@ const row = (props, i, data) =>
       </TableRowColumn>
       <TableRowColumn>
         {props.priority}
+      </TableRowColumn>
+      <TableRowColumn className="DeleteButton">
+        <IconButton>
+          <DeleteIcon />
+        </IconButton>
       </TableRowColumn>
     </TableRow>;
 
