@@ -13,7 +13,11 @@ let getTimeRemaining = function (endtime){
     };
   }
 
-const row = (props, i, data) =>
+  let handleDelete = () => {
+        console.log('dupa')
+    }
+
+const row = (props, i) =>
     <TableRow key={`thr-${i}`}>
       <TableRowColumn>
         {i + 1 + '.'}
@@ -32,12 +36,12 @@ const row = (props, i, data) =>
       </TableRowColumn>
       <TableRowColumn className="DeleteButton">
         <IconButton>
-          <DeleteIcon />
+          <DeleteIcon onClick={handleDelete}/>
         </IconButton>
       </TableRowColumn>
     </TableRow>;
 
-export default ({ data, header }) => 
+export const TableTasks = ({ data, header }) => 
   <Table>
     <TableHeader>
       <TableRow>
@@ -49,6 +53,6 @@ export default ({ data, header }) =>
       </TableRow>
     </TableHeader>
     <TableBody>
-      {data.map((x, i) => row(x, i, header))}
+      {data.map((x, i) => row(x, i))}
     </TableBody>
   </Table>;

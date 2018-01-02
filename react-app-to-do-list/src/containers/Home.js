@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import StartDialog from './StartDialog';
 import AddTaskDialog from "./AddTaskDialog";
-import TableTasks from "./TableTasks";
+import { TableTasks } from "./TableTasks";
 class Home extends Component {
   constructor(props) {
     super(props);
