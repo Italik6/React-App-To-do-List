@@ -16,8 +16,10 @@ class Home extends Component {
     data: [...this.state.data, submission]
  })
 }
+
   // Delete row from table
-  handleDelete = (index) => {
+  handleDelete = e => {
+    const index = e.currentTarget.getAttribute('index');
     var array = this.state.data.slice();
     array.splice(index, 1)
     this.setState({ data: array });
