@@ -33,7 +33,7 @@ const row = (props, i, handleDelete, handleEdit, k) =>
       </TableRowColumn>
       <TableRowColumn className="IconButton">
         <IconButton>
-          <EditIcon onClick={handleEdit}/>
+          <EditIcon onClick={handleEdit} index={i}/>
         </IconButton>
       </TableRowColumn>
       <TableRowColumn className="IconButton">

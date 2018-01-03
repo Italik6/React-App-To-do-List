@@ -12,8 +12,9 @@ class Home extends Component {
   }
   // Handlers
   handleSubmit = (submission) =>{
+    // submission.openAlert = true
     this.setState({
-    data: [...this.state.data, submission]
+    data: [...this.state.data, submission],
  })
 }
 
@@ -26,8 +27,13 @@ class Home extends Component {
   }
 
   // Edit row from table
-  handleEdit = (e) => {
-    alert('edit your task')
+  handleEdit = e => {    
+
+     const index = e.currentTarget.getAttribute('index');
+     let nameTask = this.state.data[index];
+
+     let array = nameTask.nameTask = "italik"
+     this.setState({array});
   }
 
 render() {
