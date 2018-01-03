@@ -17,6 +17,9 @@ export default class AddTaskDialog extends React.Component {
     this.handleChangeSelectField = this.handleChangeSelectField.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleCloseAlert = this.handleCloseAlert.bind(this);
+    this.handleSubmitTask = this.handleSubmitTask.bind(this);
+    this.validate = this.validate.bind(this);
   }
   // Handlers
   handleChangeSelectField = (event, index, priority) => {

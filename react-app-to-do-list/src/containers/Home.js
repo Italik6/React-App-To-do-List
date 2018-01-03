@@ -5,7 +5,10 @@ import { TableTasks } from "./TableTasks";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: []};
+    this.state = { data: [] };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
   // Handlers
   handleSubmit = (submission) =>{
@@ -14,12 +17,12 @@ class Home extends Component {
  })
 }
   // Delete row from table
-  handleDelete = (e) => {
-    var array = this.state.data;
-    var index = array.indexOf(e.target.value)
-    array.splice(index, 1);
-    this.setState({data: array });
+  handleDelete = (index) => {
+    var array = this.state.data.slice();
+    array.splice(index, 1)
+    this.setState({ data: array });
   }
+
   // Edit row from table
   handleEdit = (e) => {
     alert('edit your task')
