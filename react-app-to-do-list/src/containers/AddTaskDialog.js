@@ -5,7 +5,6 @@ import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import FlatButton from 'material-ui/FlatButton';
-import { AddButton } from '../components/AddButton';
 import { Alert } from '../components/Alert';
 
 export default class AddTaskDialog extends React.Component {
@@ -15,7 +14,6 @@ export default class AddTaskDialog extends React.Component {
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
     this.handleChangeSelectField = this.handleChangeSelectField.bind(this);
-    this.handleOpen = this.handleOpen.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleCloseAlert = this.handleCloseAlert.bind(this);
     this.handleSubmitTask = this.handleSubmitTask.bind(this);
@@ -45,10 +43,6 @@ export default class AddTaskDialog extends React.Component {
       nameTask: event.target.value,  
     });
   }
-
-  handleOpen = () => { 
-    this.setState({open: true});
-  };
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -106,13 +100,12 @@ export default class AddTaskDialog extends React.Component {
   render() {
     const actions = [
       <FlatButton label="Submit" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitTask(e)} />,
-      <FlatButton label="Ok, got it!" primary={true} onClick={this.handleCloseAlert} />,
+      <FlatButton label="Ok, got it!" primary={true} onClick={this.handleCloseAlert} />
     ];
 
     return (
       <form>
-        <AddButton onClick={this.handleOpen} />
-        <Dialog title="Add new task" open={this.state.open} actions={actions[0]}>
+        <Dialog title="Add new task" open={this.props.open} actions={actions[0]}>
           <TextField floatingLabelText="Task" value={this.state.nameTask} onChange={e => this.handleTextFieldChange(e)} errorText={this.state.nameTaskError} onKeyPress={this.handleKeyPress}/>
           <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate} />
           <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField} >

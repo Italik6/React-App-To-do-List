@@ -14,7 +14,7 @@ let getTimeRemaining = function (endtime){
     };
   }
 
-const row = (props, i, handleDelete, handleEdit, k) =>
+const row = (props, i, handleDelete, handleEdit) =>
     <TableRow key={`thr-${i}`}>
       <TableRowColumn>
         {i + 1 + '.'}
@@ -33,12 +33,12 @@ const row = (props, i, handleDelete, handleEdit, k) =>
       </TableRowColumn>
       <TableRowColumn className="IconButton">
         <IconButton>
-          <EditIcon onClick={handleEdit} index={i}/>
+          <EditIcon onClick={handleEdit} index={i} />
         </IconButton>
       </TableRowColumn>
       <TableRowColumn className="IconButton">
         <IconButton>
-          <DeleteIcon onClick={handleDelete} index={i}/>
+          <DeleteIcon onClick={handleDelete} index={i} />
         </IconButton>
       </TableRowColumn>
     </TableRow>;
