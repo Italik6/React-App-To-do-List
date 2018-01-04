@@ -50,7 +50,7 @@ export default class AddTaskDialog extends React.Component {
     }
   }
   
-  handleCloseAlert = () =>{
+  handleCloseAlert = () => {
     this.setState({
       openAlert: false
     })
@@ -92,7 +92,7 @@ export default class AddTaskDialog extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton label="Submit" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitTask(e)} />,
+      <FlatButton label="Add" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitTask(e)} />,
       <FlatButton label="Ok, got it!" primary={true} onClick={this.handleCloseAlert} />
     ];
 
