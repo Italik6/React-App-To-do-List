@@ -14,10 +14,9 @@ class Home extends Component {
   }
   // Handlers
   handleSubmit = (submission) =>{
-    submission.open = true
-    this.setState({open: false});
     this.setState({
     data: [...this.state.data, submission],
+    open: false
  })
 }
   // Delete row from table
@@ -29,7 +28,8 @@ class Home extends Component {
   }
   // Edit row from table
   handleEdit = e => {    
-
+     this.setState({open: true});
+     debugger;
      const index = e.currentTarget.getAttribute('index');
      let nameTask = this.state.data[index];
 
@@ -46,7 +46,7 @@ render() {
       <div>
         <AddButton onClick={this.handleOpen} />
         <StartDialog />
-        <AddTaskDialog onSubmit={this.handleSubmit} open={this.state.open}/>
+        <AddTaskDialog onSubmit={this.handleSubmit} open={this.state.open} />
         <TableTasks handleDelete={this.handleDelete} handleEdit={this.handleEdit} data={this.state.data} 
         header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }, { name: "Edit" }, { name: "Delete" }]} />
       </div>

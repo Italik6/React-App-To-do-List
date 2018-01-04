@@ -46,16 +46,10 @@ export default class AddTaskDialog extends React.Component {
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-     this.handleSubmit(event);
-    }
-  }
-
-  handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
      this.handleSubmitTask(event);
     }
   }
-
+  
   handleCloseAlert = () =>{
     this.setState({
       openAlert: false
@@ -69,7 +63,7 @@ export default class AddTaskDialog extends React.Component {
     if (!err) {
       this.props.onSubmit(this.state);
       this.setState({open: false});
-      // clear form
+      // Clear form
       this.setState({
         nameTask: "",
         nameTaskError: "",
@@ -88,7 +82,6 @@ export default class AddTaskDialog extends React.Component {
   if (this.state.nameTask.length < 3) {
       isError = true;
       errors.nameTaskError = "Name of task needs to be at least 3 characters long.";
-      console.log(this.state.deadline)
   }
 
   this.setState({
@@ -106,15 +99,18 @@ export default class AddTaskDialog extends React.Component {
     return (
       <form>
         <Dialog title="Add new task" open={this.props.open} actions={actions[0]}>
-          <TextField floatingLabelText="Task" value={this.state.nameTask} onChange={e => this.handleTextFieldChange(e)} errorText={this.state.nameTaskError} onKeyPress={this.handleKeyPress}/>
+          <TextField floatingLabelText="Task" value={this.state.nameTask} errorText={this.state.nameTaskError}
+          onChange={e => this.handleTextFieldChange(e)}  
+          onKeyPress={this.handleKeyPress}/>
           <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate} />
-          <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField} >
+          <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField}>
               <MenuItem value="High" primaryText="High" />
               <MenuItem value="Medium" primaryText="Medium" />
               <MenuItem value="Low" primaryText="Low" />
-            </SelectField>
+          </SelectField>
         </Dialog>  
-        <Alert open={this.state.openAlert} actions={actions[1]} alertStatement={"Time to complete the task has already passed. Change the date or keep curent one."}/>
+        <Alert open={this.state.openAlert} actions={actions[1]} 
+        alertStatement={"Time to complete the task has already passed. Change the date or keep current one."}/>
       </form>
     );
   }

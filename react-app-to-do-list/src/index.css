@@ -6,3 +6,11 @@ body {
   font-family: sans-serif;
   background-color: rgb(48, 48, 48);
 }
+
+.AddButton{
+  margin:20px;
+}
+
+.IconButton {
+  padding-left:10px !important;
+}
