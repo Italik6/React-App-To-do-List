@@ -98,7 +98,7 @@ export default class AddTaskDialog extends React.Component {
 
     return (
       <form>
-        <Dialog title="Add new task" open={this.props.open} actions={actions[0]}>
+        <Dialog title="Add new Task" open={this.props.open} actions={actions[0]}>
           <TextField floatingLabelText="Task" value={this.state.nameTask} errorText={this.state.nameTaskError}
           onChange={e => this.handleTextFieldChange(e)}  
           onKeyPress={this.handleKeyPress}/>
