@@ -20,7 +20,7 @@ class Home extends Component {
     this.handleOpen = this.handleOpen.bind(this);
   }
   // Handlers
-  handleSubmit = (submission) =>{
+  handleSubmit = (submission) => {
     this.setState({
     data: [...this.state.data, submission],
     open: false
@@ -50,17 +50,14 @@ class Home extends Component {
   }
 
   handleSubmitEdit = (e) => {
-    e.preventDefault();
-    const err = this.validate();
     debugger;
+    const err = this.validate();
     if (!err) {
-      // this.props.onSubmit(this.state);
       this.setState({
-        data: [...this.state.data]
-     })
-      this.setState({openEdit: false});
-      // Clear form
-      this.setState({
+        // Set new data array
+        data: [this.state],
+        // Clear form
+        openEdit: false,
         nameTask: "",
         nameTaskError: "",
         priority: "Low",

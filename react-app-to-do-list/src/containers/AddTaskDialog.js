@@ -57,7 +57,6 @@ export default class AddTaskDialog extends React.Component {
   }
 
   handleSubmitTask = e => {
-    e.preventDefault();
     const err = this.validate();
 
     if (!err) {
