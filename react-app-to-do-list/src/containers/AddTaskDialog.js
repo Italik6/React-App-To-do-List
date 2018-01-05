@@ -62,9 +62,9 @@ export default class AddTaskDialog extends React.Component {
 
     if (!err) {
       this.props.onSubmit(this.state);
-      this.setState({open: false});
       // Clear form
       this.setState({
+        open: false,
         nameTask: "",
         nameTaskError: "",
         priority: "Low",

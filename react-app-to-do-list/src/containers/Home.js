@@ -40,22 +40,24 @@ class Home extends Component {
   // ********************************** EDIT TASK SECTION ****************************************
   // Edit row from table
   handleEdit = e => {    
-    this.setState({openEdit: true});
     const index = e.currentTarget.getAttribute('index');
     let foundObject = this.state.data[index];
   
     let nameTaskNew = foundObject.nameTask;
     let priorityNew = foundObject.priority;
     let deadlineNew = foundObject.deadline;
-    this.setState({nameTask: nameTaskNew, priority: priorityNew, deadline: deadlineNew });
+    this.setState({openEdit: true, nameTask: nameTaskNew, priority: priorityNew, deadline: deadlineNew });
   }
 
   handleSubmitEdit = (e) => {
     e.preventDefault();
     const err = this.validate();
-
+    debugger;
     if (!err) {
       // this.props.onSubmit(this.state);
+      this.setState({
+        data: [...this.state.data]
+     })
       this.setState({openEdit: false});
       // Clear form
       this.setState({
