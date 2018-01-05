@@ -11,7 +11,7 @@ export default class StartDialog extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this);
       }
   
-      handleSubmit = (event) => {
+      handleSubmit = event => {
         let password = this.refs.myPasswordValue.input.value;
     // Check default password
           if(password === "123"){
@@ -24,16 +24,14 @@ export default class StartDialog extends Component {
           }
       };
 
-      handleKeyPress = (event) => {
+      handleKeyPress = event => {
         if (event.key === 'Enter') {
          this.handleSubmit(event);
         }
       }
 
 render() {
-    const actions = [
-        <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} />,
-    ];
+    const actions = [ <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} /> ];
 
     return (
         <Dialog title="Welcome to the React App!" actions={actions} modal={true} open={this.state.open} >

@@ -10,6 +10,8 @@ import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import { Alert } from '../components/Alert';
+
+let editTask;
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -18,14 +20,23 @@ class Home extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
+    this.handleSubmitEdit = this.handleSubmitEdit.bind(this);
+    this.handleOpenEdit = this.handleOpenEdit.bind(this);
+    this.handleCloseEdit = this.handleCloseEdit.bind(this);
+    this.handleChangeSelectField = this.handleChangeSelectField.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleCloseAlert = this.handleCloseAlert.bind(this);
+    this.validate = this.validate.bind(this);
   }
-  // Handlers
+
   handleSubmit = (submission) => {
     this.setState({
-    data: [...this.state.data, submission],
-    open: false
- })
-}
+      data: [...this.state.data, submission],
+      open: false
+    })
+  }
 
   handleOpen = () => { 
     this.setState({open: true});
@@ -41,21 +52,19 @@ class Home extends Component {
   // Edit row from table
   handleEdit = e => {    
     const index = e.currentTarget.getAttribute('index');
-    let foundObject = this.state.data[index];
-  
-    let nameTaskNew = foundObject.nameTask;
-    let priorityNew = foundObject.priority;
-    let deadlineNew = foundObject.deadline;
-    this.setState({openEdit: true, nameTask: nameTaskNew, priority: priorityNew, deadline: deadlineNew });
+    editTask = this.state.data[index];
+    // Unpacking array of objects
+    let {nameTask:nameTaskEdit, priority:priorityEdit, deadline: deadlineEdit} = editTask;
+    this.setState({ openEdit: true, nameTask: nameTaskEdit, priority: priorityEdit, deadline: deadlineEdit });
   }
 
-  handleSubmitEdit = (e) => {
-    debugger;
+  handleSubmitEdit = e => {
+    editTask.nameTask = this.state.nameTask;
+    editTask.priority = this.state.priority;
+    editTask.deadline = this.state.deadline;
     const err = this.validate();
     if (!err) {
       this.setState({
-        // Set new data array
-        data: [this.state],
         // Clear form
         openEdit: false,
         nameTask: "",
@@ -67,51 +76,49 @@ class Home extends Component {
   }
 
   handleOpenEdit = () => {
-    this.setState({
-      openEdit: true
-    })
+    this.setState({ openEdit: true })
   }
 
   handleCloseEdit = () => {
-    this.setState({
-      openEdit: false
-    })
+    this.setState({ openEdit: false })
   }
 
   handleChangeSelectField = (event, index, priority) => {
-    this.setState(
-      {priority}
-    );
+    this.setState( {priority} );
   }
 
   handleChangeDate = (event, date) => {
-    this.setState({
-      deadline: date
-    });
+    this.setState({ deadline: date });
+    // Current date
     let today = new Date();
-    if (date < today) {
-      this.setState({       
-        openAlert: true
-      })
+    let days = today.getDate();
+    let month = today.getMonth()+1;
+    // Choosen date
+    let daysChoosen = date.getDate();
+    let monthChoosen = date.getMonth()+1;
+    // Validation of date
+    if (date < today & daysChoosen !== days) {
+      this.setState({ openAlert: true })
+    }
+    else if(date < today & daysChoosen === days & monthChoosen !== month) {
+      this.setState({ openAlert: true })
     }
   }
 
-  handleTextFieldChange = (event) =>{
+  handleTextFieldChange = event =>{
     this.setState({
       nameTask: event.target.value,  
     });
   }
 
-  handleKeyPress = (event) => {
+  handleKeyPress = event => {
     if (event.key === 'Enter') {
-     this.handleSubmitTask(event);
+     this.handleSubmitEdit(event);
     }
   }
   
   handleCloseAlert = () => {
-    this.setState({
-      openAlert: false
-    })
+    this.setState({ openAlert: false })
   }
 
 // Validation
@@ -126,9 +133,7 @@ class Home extends Component {
       errors.nameTaskError = "Name of task needs to be at least 3 characters long.";
   }
 
-  this.setState({
-      ...errors
-  });
+    this.setState({ ...errors });
     return isError;
   };
   
@@ -137,9 +142,8 @@ render() {
     <FlatButton label="Edit" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitEdit(e)} />,
     <FlatButton label="Cancel" primary={true} onClick={this.handleCloseEdit} />
   ];
-  const actionsAlert =[
-    <FlatButton label="Ok, got it!" primary={true} onClick={this.handleCloseAlert} />
-  ];
+  const actionsAlert = [ <FlatButton label="Ok, got it!" primary={true} onClick={this.handleCloseAlert} /> ];
+
     return (
       <div>
         <AddButton onClick={this.handleOpen} />
@@ -149,20 +153,20 @@ render() {
         header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }, { name: "Edit" }, { name: "Delete" }]} />
         {/* Edit form */}
         <form>
-        <Dialog title="Edit your Task" open={this.state.openEdit} actions={actions}>
-          <TextField floatingLabelText="Task" value={this.state.nameTask} errorText={this.state.nameTaskError}
-          onChange={e => this.handleTextFieldChange(e)}  
-          onKeyPress={this.handleKeyPress} />
-          <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate} />
-          <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField}>
-              <MenuItem value="High" primaryText="High" />
-              <MenuItem value="Medium" primaryText="Medium" />
-              <MenuItem value="Low" primaryText="Low" />
-          </SelectField>
-        </Dialog>  
-        <Alert open={this.state.openAlert} actions={actionsAlert} 
-        alertStatement={"Time to complete the task has already passed. Change the date or keep current one."}/>
-      </form>
+          <Dialog title="Edit your Task" open={this.state.openEdit} actions={actions}>
+            <TextField floatingLabelText="Task" value={this.state.nameTask} errorText={this.state.nameTaskError}
+            onChange={e => this.handleTextFieldChange(e)}  
+            onKeyPress={this.handleKeyPress} />
+            <DatePicker floatingLabelText="Deadline" value={this.state.deadline} onChange={this.handleChangeDate} />
+            <SelectField floatingLabelText="Priority" value={this.state.priority} onChange={this.handleChangeSelectField}>
+                <MenuItem value="High" primaryText="High" />
+                <MenuItem value="Medium" primaryText="Medium" />
+                <MenuItem value="Low" primaryText="Low" />
+            </SelectField>
+          </Dialog>  
+          <Alert open={this.state.openAlert} actions={actionsAlert} 
+          alertStatement={"Time to complete the task has already passed. Change the date or keep current one."}/>
+        </form>
       </div>
     );
   }}

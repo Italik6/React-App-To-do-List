@@ -21,44 +21,43 @@ export default class AddTaskDialog extends React.Component {
   }
   // Handlers
   handleChangeSelectField = (event, index, priority) => {
-    this.setState(
-      {priority}
-    );
+    this.setState({ priority });
   }
 
   handleChangeDate = (event, date) => {
-    this.setState({
-      deadline: date
-    });
+    this.setState({ deadline: date });
+    // Current date
     let today = new Date();
-    if (date < today) {
-      this.setState({       
-        openAlert: true
-      })
+    let days = today.getDate();
+    let month = today.getMonth()+1;
+    // Choosen date
+    let daysChoosen = date.getDate();
+    let monthChoosen = date.getMonth()+1;
+    // Validation of date
+    if (date < today & daysChoosen !== days) {
+      this.setState({ openAlert: true })
+    }
+    else if(date < today & daysChoosen === days & monthChoosen !== month) {
+      this.setState({ openAlert: true })
     }
   }
 
-  handleTextFieldChange = (event) =>{
-    this.setState({
-      nameTask: event.target.value,  
-    });
+  handleTextFieldChange = event => {
+    this.setState({ nameTask: event.target.value });
   }
 
-  handleKeyPress = (event) => {
+  handleKeyPress = event => {
     if (event.key === 'Enter') {
      this.handleSubmitTask(event);
     }
   }
   
   handleCloseAlert = () => {
-    this.setState({
-      openAlert: false
-    })
+    this.setState({ openAlert: false })
   }
 
   handleSubmitTask = e => {
     const err = this.validate();
-
     if (!err) {
       this.props.onSubmit(this.state);
       // Clear form
@@ -83,9 +82,7 @@ export default class AddTaskDialog extends React.Component {
       errors.nameTaskError = "Name of task needs to be at least 3 characters long.";
   }
 
-  this.setState({
-      ...errors
-  });
+    this.setState({ ...errors });
     return isError;
   };
 

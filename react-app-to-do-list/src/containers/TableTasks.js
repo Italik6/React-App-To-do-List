@@ -5,7 +5,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 
   // Set up timer
-let getTimeRemaining = function (endtime){
+let getTimeRemaining = endtime => {
     var t = Date.parse(endtime) - Date.parse(new Date());
     var days = Math.floor( t/(1000*60*60*24) + 1 );
     return {
