@@ -10,6 +10,7 @@ import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import { Alert } from '../components/Alert';
+import PropTypes from 'prop-types';
 
 let editTask;
 class Home extends Component {
@@ -44,7 +45,7 @@ class Home extends Component {
   // Delete row from table
   handleDelete = e => {
     const index = e.currentTarget.getAttribute('index');
-    var array = this.state.data.slice();
+    let array = this.state.data.slice();
     array.splice(index, 1)
     this.setState({ data: array });
   }
@@ -54,7 +55,7 @@ class Home extends Component {
     const index = e.currentTarget.getAttribute('index');
     editTask = this.state.data[index];
     // Unpacking array of objects
-    let {nameTask:nameTaskEdit, priority:priorityEdit, deadline: deadlineEdit} = editTask;
+    let { nameTask: nameTaskEdit, priority: priorityEdit, deadline: deadlineEdit } = editTask;
     this.setState({ openEdit: true, nameTask: nameTaskEdit, priority: priorityEdit, deadline: deadlineEdit });
   }
 
@@ -100,7 +101,7 @@ class Home extends Component {
     if (date < today & daysChoosen !== days) {
       this.setState({ openAlert: true })
     }
-    else if(date < today & daysChoosen === days & monthChoosen !== month) {
+    else if (date < today & daysChoosen === days & monthChoosen !== month) {
       this.setState({ openAlert: true })
     }
   }
@@ -172,3 +173,13 @@ render() {
   }}
 
 export default Home;
+// Proptypes
+Home.propTypes = {
+  priority: PropTypes.string,
+  nameTask: PropTypes.string,
+  deadline: PropTypes.object,
+  open: PropTypes.bool,
+  openAlert: PropTypes.bool,
+  openEdit: PropTypes.bool,
+  data: PropTypes.array
+}

@@ -6,6 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import FlatButton from 'material-ui/FlatButton';
 import { Alert } from '../components/Alert';
+import PropTypes from 'prop-types';
 
 export default class AddTaskDialog extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class AddTaskDialog extends React.Component {
     this.handleSubmitTask = this.handleSubmitTask.bind(this);
     this.validate = this.validate.bind(this);
   }
+
   // Handlers
   handleChangeSelectField = (event, index, priority) => {
     this.setState({ priority });
@@ -111,3 +113,11 @@ export default class AddTaskDialog extends React.Component {
     );
   }
 }
+// Proptypes
+  AddTaskDialog.propTypes = {
+    priority: PropTypes.string,
+    nameTask: PropTypes.string,
+    deadline: PropTypes.object,
+    open: PropTypes.bool,
+    openAlert: PropTypes.bool
+  }

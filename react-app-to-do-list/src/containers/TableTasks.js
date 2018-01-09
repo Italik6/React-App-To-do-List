@@ -3,11 +3,12 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+import PropTypes from 'prop-types';
 
   // Set up timer
 let getTimeRemaining = endtime => {
-    var t = Date.parse(endtime) - Date.parse(new Date());
-    var days = Math.floor( t/(1000*60*60*24) + 1 );
+    let t = Date.parse(endtime) - Date.parse(new Date());
+    let days = Math.floor( t/(1000*60*60*24) + 1 );
     return {
       'days': days
     };
@@ -57,3 +58,9 @@ export const TableTasks = ({ data, header, handleDelete, handleEdit }) =>
       {data.map((x, i) => row(x, i, handleDelete, handleEdit))}
     </TableBody>
   </Table>;
+  // Proptypes
+  TableTasks.propTypes = {
+    priority: PropTypes.string,
+    nameTask: PropTypes.string,
+    deadline: PropTypes.object,
+  }

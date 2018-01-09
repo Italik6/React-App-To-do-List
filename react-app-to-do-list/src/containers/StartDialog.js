@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types';
 
 export default class StartDialog extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ export default class StartDialog extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
       }
-  
+     
       handleSubmit = event => {
         let password = this.refs.myPasswordValue.input.value;
     // Check default password
@@ -47,3 +48,12 @@ render() {
     );
   }
 }
+// Proptypes
+StartDialog.propTypes = {
+    errorText: PropTypes.string,
+    value: PropTypes.object,
+    open: PropTypes.bool,
+  }
+
+
+  
