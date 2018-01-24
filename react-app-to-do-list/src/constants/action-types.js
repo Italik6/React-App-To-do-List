@@ -1,0 +1,1 @@
+export const CHECK_PASSWORD = "CHECK_PASSWORD";
