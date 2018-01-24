@@ -7,33 +7,6 @@ import PropTypes from 'prop-types';
 import { checkPassword } from "../actions/index";
 import { connect } from "react-redux";
 
-// import { createStore } from "redux";
-// import { Provider } from 'react-redux'
-
-// const reducer = (state={errorText: '', open: true}, action) => {
-//     switch(action.type) {
-//         case "CHECK_PASSWORD": {
-//             debugger
-//             return state = {...state, open: false};
-//         }
-//         default:
-//             return state;
-//     }
-// }
-
-// const store = createStore(reducer, {
-//     errorText: '',
-//     open:true
-// });
-
-// store.subscribe(() => {
-//     debugger
-//     console.log('store change', store.getState())
-// })
-
-// store.dispatch({type: "CHECK_PASSWORD"})
-
-
 const mapDispatchToProps = dispatch => {
     return {
         checkPassword: () => dispatch(checkPassword())
@@ -70,7 +43,6 @@ render() {
     const actions = [ <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} /> ];
 
     return (
-        // <Provider store={store} >
             <Dialog title="Welcome to the React App!" actions={actions} modal={true} open={this.state.open} >
                 <p className="StartDialog-subheader">To use the application it is necessary to enter the password.<br/>
                 (default password: 123)</p>
@@ -81,7 +53,6 @@ render() {
                 ref="myPasswordValue" 
                 onKeyPress={this.handleKeyPress}/>
             </Dialog>
-        // </Provider>
     );
   }
 }
