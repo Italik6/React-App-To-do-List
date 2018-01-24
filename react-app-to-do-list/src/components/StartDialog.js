@@ -36,7 +36,7 @@ import { connect } from "react-redux";
 
 const mapDispatchToProps = dispatch => {
     return {
-        checkPassword: article => dispatch(checkPassword(article))
+        checkPassword: () => dispatch(checkPassword())
     };
   };
 
