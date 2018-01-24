@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import StartDialog from './StartDialog';
+import StartForm from './StartDialog';
 import AddTaskDialog from "./AddTaskDialog";
 import { TableTasks } from "./TableTasks";
 import { AddButton } from '../components/AddButton';
@@ -148,7 +148,7 @@ render() {
     return (
       <div>
         <AddButton onClick={this.handleOpen} />
-        <StartDialog />
+        <StartForm />
         <AddTaskDialog onSubmit={this.handleSubmit} open={this.state.open} />
         <TableTasks handleDelete={this.handleDelete} handleEdit={this.handleEdit} data={this.state.data} 
         header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }, { name: "Edit" }, { name: "Delete" }]} />
