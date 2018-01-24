@@ -1,9 +1,13 @@
 import { CHECK_PASSWORD } from "../constants/action-types";
 
-const checkpasswordReducer = (state = [], action) => {
+const initialState = {
+  open: true
+};
+
+const checkpasswordReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHECK_PASSWORD:
-      return [...state, action.open];
+      return [action.payload];
     default:
       return state;
   }

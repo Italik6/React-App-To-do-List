@@ -4,12 +4,11 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
 
-import { checkPassword } from "../actions/index";
 import { connect } from "react-redux";
 
 const mapDispatchToProps = dispatch => {
     return {
-        checkPassword: () => dispatch(checkPassword())
+        checkPassword: () => dispatch({type: 'CHECK_PASSWORD'})
     };
   };
 
@@ -23,9 +22,10 @@ class StartDialog extends Component {
      
       handleSubmit = event => {
         let password = this.refs.myPasswordValue.input.value;
+        this.props.checkPassword();
     // Check default password
           if(password === "123"){
-                this.setState({ errorText: '', open: false})
+                this.setState({ errorText: '', open: false })
           } else if (password !== "123" && password !== "") {
                 this.setState({ errorText: "Password is incorrect" })
           } else if (password === ""){

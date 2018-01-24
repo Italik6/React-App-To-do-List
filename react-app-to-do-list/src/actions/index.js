@@ -1,4 +1,5 @@
 export const checkPassword = () => ({
     type: "CHECK_PASSWORD",
-    open: false
+    payload: {open: false}
   });
+
