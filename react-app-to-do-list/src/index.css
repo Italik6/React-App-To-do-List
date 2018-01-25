@@ -1,16 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background-color: rgb(48, 48, 48);
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: rgb(48, 48, 48);
 }
 
-.AddButton{
-  margin:20px;
+.AddButton {
+    margin: 20px;
 }
 
 .IconButton {
-  padding-left:10px !important;
+    padding-left: 10px !important;
+}
+
+.TextInfo {
+    color: #fff;
+    text-align: center;
+    font-style: italic;
+}
+
+.BtnBottom {
+    position: absolute;
+    bottom: 10px;
 }

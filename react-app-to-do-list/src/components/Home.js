@@ -4,6 +4,7 @@ import AddTaskDialog from "./AddTaskDialog";
 import { TableTasks } from "./TableTasks";
 import { AddButton } from '../components/AddButton';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import TextField from "material-ui/TextField";
 import Dialog from 'material-ui/Dialog';
 import DatePicker from 'material-ui/DatePicker';
@@ -168,6 +169,7 @@ render() {
           <Alert open={this.state.openAlert} actions={actionsAlert} 
           alertStatement={"Time to complete the task has already passed. Change the date or keep current one."}/>
         </form>
+        <RaisedButton label="More features" className='BtnBottom' fullWidth={true} href="/more-features" />
       </div>
     );
   }}
