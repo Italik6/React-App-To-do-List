@@ -22,10 +22,12 @@ class StartDialog extends Component {
      
       handleSubmit = event => {
         let password = this.refs.myPasswordValue.input.value;
+    
         this.props.checkPassword();
     // Check default password
           if(password === "123"){
-                this.setState({ errorText: '', open: false })
+                this.setState({ errorText: '', open: false });
+                localStorage.setItem('password', 'checked');
           } else if (password !== "123" && password !== "") {
                 this.setState({ errorText: "Password is incorrect" })
           } else if (password === ""){
@@ -37,6 +39,13 @@ class StartDialog extends Component {
         if (event.key === 'Enter') {
          this.handleSubmit(event);
         }
+      }
+
+      componentDidMount(){
+          let cookiePassword = localStorage.getItem('password');
+          if(cookiePassword === "checked"){
+            this.setState({ open: false });
+          }
       }
 
 render() {
