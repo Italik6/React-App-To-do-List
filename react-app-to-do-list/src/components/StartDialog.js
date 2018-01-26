@@ -27,6 +27,7 @@ class StartDialog extends Component {
     // Check default password
           if(password === "123"){
                 this.setState({ errorText: '', open: false });
+                // Local storage for password
                 localStorage.setItem('password', 'checked');
           } else if (password !== "123" && password !== "") {
                 this.setState({ errorText: "Password is incorrect" })
@@ -41,7 +42,7 @@ class StartDialog extends Component {
         }
       }
 
-      componentDidMount(){
+      componentWillMount(){
           let cookiePassword = localStorage.getItem('password');
           if(cookiePassword === "checked"){
             this.setState({ open: false });
