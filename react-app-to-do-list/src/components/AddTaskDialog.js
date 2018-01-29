@@ -83,7 +83,6 @@ export default class AddTaskDialog extends React.Component {
       isError = true;
       errors.nameTaskError = "Name of task needs to be at least 3 characters long.";
   }
-
     this.setState({ ...errors });
     return isError;
   };

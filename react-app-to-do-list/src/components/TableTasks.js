@@ -58,6 +58,7 @@ export const TableTasks = ({ data, header, handleDelete, handleEdit }) =>
       {data.map((x, i) => row(x, i, handleDelete, handleEdit))}
     </TableBody>
   </Table>;
+  
   // Proptypes
   TableTasks.propTypes = {
     priority: PropTypes.string,

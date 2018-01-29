@@ -29,6 +29,7 @@ ReactDOM.render(
     <div>
     <Switch>
       <Route exact path="/home" component={Home} />
+      <Route exact path="/" component={Home} />
       <Route path="/more-features" component={MoreFeatures} />
       <Route component={NotFound} />
     </Switch>

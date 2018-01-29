@@ -38,7 +38,6 @@ class Home extends Component {
       data: [...this.state.data, submission],
       open: false
     })
-    localStorage.setItem('items', JSON.stringify(submission));
   }
 
   handleOpen = () => { 
