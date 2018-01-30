@@ -6,17 +6,17 @@
   export default class StartDialog extends Component {
       constructor(props) {
           super(props);
-          this.state = { errorText: '', value: props.value, open: false };
+          this.state = { errorText: '', value: props.value, open: true };
           this.handleSubmit = this.handleSubmit.bind(this);
           this.handleKeyPress = this.handleKeyPress.bind(this);
         }
     
         handleSubmit = event => {
           let password = this.refs.myPasswordValue.input.value;
-      // Check default password
+        // Check default password
             if(password === "123"){
                   this.setState({ errorText: '', open: false })
-                                  // Local storage for password
+        // Local storage for password
                 localStorage.setItem('password', 'checked');
             } else if (password !== "123" && password !== "") {
                   this.setState({ errorText: "Password is incorrect" })
@@ -36,6 +36,7 @@
               this.setState({ open: false });
             }
         }
+        
   render() {
       const actions = [ <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} /> ];
   

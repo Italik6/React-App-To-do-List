@@ -44,8 +44,8 @@ const row = (props, i, handleDelete, handleEdit) =>
     </TableRow>;
 
 export const TableTasks = ({ data, header, handleDelete, handleEdit }) => 
-  <Table>
-    <TableHeader>
+  <Table selectable={false}> 
+    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
       <TableRow>
         {header.map((x, i) =>
           <TableHeaderColumn key={`thc-${i}`}>
@@ -54,11 +54,11 @@ export const TableTasks = ({ data, header, handleDelete, handleEdit }) =>
         )}
       </TableRow>
     </TableHeader>
-    <TableBody>
+    <TableBody displayRowCheckbox={false}>
       {data.map((x, i) => row(x, i, handleDelete, handleEdit))}
     </TableBody>
   </Table>;
-  
+
   // Proptypes
   TableTasks.propTypes = {
     priority: PropTypes.string,

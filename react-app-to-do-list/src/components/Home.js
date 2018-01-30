@@ -12,11 +12,10 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import { Alert } from '../components/Alert';
 import PropTypes from 'prop-types';
-
 import { connect } from "react-redux";
 
 let editTask;
-
+// Redux part
 const mapDispatchToProps = dispatch => {
     return {
         closeReduxDialog: () => dispatch({type: 'CLOSE_REDUX_DIALOG'}),
@@ -24,11 +23,11 @@ const mapDispatchToProps = dispatch => {
     };
   };
 
-  function mapStateToProps(state) {
+const mapStateToProps = state => {
     return {
-        open: state.closeReduxDialog.open,
-     };
-    }
+        open: state.closeReduxDialog.open
+    };
+  };
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -137,7 +136,6 @@ class Home extends Component {
   handleCloseAlert = () => {
     this.setState({ openAlert: false })
   }
-
 // Validation
   validate = () => {
     let isError = false;
@@ -149,9 +147,8 @@ class Home extends Component {
       isError = true;
       errors.nameTaskError = "Name of task needs to be at least 3 characters long.";
   }
-
-    this.setState({ ...errors });
-    return isError;
+  this.setState({ ...errors });
+  return isError;
   };
   
 render() {
@@ -159,10 +156,7 @@ render() {
     <FlatButton label="Edit" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitEdit(e)} />,
     <FlatButton label="Cancel" primary={true} onClick={this.handleCloseEdit} />
   ];
-  const actionsRedux = [
-    <FlatButton label="OK" primary={true} onClick={this.props.closeReduxDialog} />
-  ];
-
+  const actionsRedux = [ <FlatButton label="OK" primary={true} onClick={this.props.closeReduxDialog} /> ];
   const actionsAlert = [ <FlatButton label="Ok, got it!" primary={true} onClick={this.handleCloseAlert} /> ];
 
     return (
@@ -186,17 +180,16 @@ render() {
             </SelectField>
           </Dialog>  
           <Alert open={this.state.openAlert} actions={actionsAlert} 
-          alertStatement={"Time to complete the task has already passed. Change the date or keep current one."}/>
+          alertStatement={"Time to complete the task has already passed. Change the date or keep current one."} />
         </form>
         <RaisedButton label="More features" className='BtnBottom' fullWidth={true} href="/more-features" />
-        {/* Redux part */}
-        <RaisedButton label="Try Redux" className='BtnBottomHigher' fullWidth={true} onClick={this.props.openReduxDialog}/>
-        <Dialog title="this component has been supported by redux." open={this.props.open} actions={actionsRedux}></Dialog>  
+        {/* Show redux component */}
+        <RaisedButton label="Try Redux" className='BtnBottomHigher' fullWidth={true} onClick={this.props.openReduxDialog} />
+        <Dialog title="This component has been supported by redux." open={this.props.open} actions={actionsRedux}></Dialog>  
       </div>
     );
   }}
 const HomeMain = connect(mapStateToProps, mapDispatchToProps)(Home);
-
 export default HomeMain;
 // Proptypes
 Home.propTypes = {

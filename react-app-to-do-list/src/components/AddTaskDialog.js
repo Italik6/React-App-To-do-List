@@ -72,7 +72,7 @@ export default class AddTaskDialog extends React.Component {
       });
     }
   };
-// Validation
+// Validation of add/edit task
   validate = () => {
     let isError = false;
     const errors = {
@@ -83,8 +83,8 @@ export default class AddTaskDialog extends React.Component {
       isError = true;
       errors.nameTaskError = "Name of task needs to be at least 3 characters long.";
   }
-    this.setState({ ...errors });
-    return isError;
+  this.setState({ ...errors });
+  return isError;
   };
 
   render() {

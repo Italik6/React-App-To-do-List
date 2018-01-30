@@ -1,6 +1,6 @@
 
 const initialState = {
- open: true
+ open: false
 };
 
 const openreduxReducer = (state = initialState, action) => {
