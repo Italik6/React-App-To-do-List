@@ -24,3 +24,8 @@ body {
     position: absolute;
     bottom: 10px;
 }
+
+.BtnBottomHigher{
+    position: absolute;
+    bottom: 50px;
+}

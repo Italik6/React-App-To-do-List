@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-import checkpasswordReducer from "./checkpasswordReducer";
+import openreduxReducer from "./openreduxReducer";
 
-export default combineReducers({ checkPassword: checkpasswordReducer });
+export default combineReducers({ closeReduxDialog: openreduxReducer });

@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Home from './components/Home';
+import HomeMain from './components/Home';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import store from "../src/stores/index";
-// import { checkPassword } from "../src/actions/index";
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MoreFeatures } from './components/MoreFeatures';
@@ -22,8 +21,8 @@ ReactDOM.render(
     <Router>
     <div>
     <Switch>
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/" component={Home} />
+      <Route exact path="/home" component={HomeMain} />
+      <Route exact path="/" component={HomeMain} />
       <Route path="/more-features" component={MoreFeatures} />
       <Route component={NotFound} />
     </Switch>

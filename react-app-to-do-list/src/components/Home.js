@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import StartForm from './StartDialog';
+import StartDialog from './StartDialog';
 import AddTaskDialog from "./AddTaskDialog";
 import { TableTasks } from "./TableTasks";
 import { AddButton } from '../components/AddButton';
@@ -13,7 +13,22 @@ import SelectField from 'material-ui/SelectField';
 import { Alert } from '../components/Alert';
 import PropTypes from 'prop-types';
 
+import { connect } from "react-redux";
+
 let editTask;
+
+const mapDispatchToProps = dispatch => {
+    return {
+        closeReduxDialog: () => dispatch({type: 'CLOSE_REDUX_DIALOG'}),
+        openReduxDialog: () => dispatch({type: 'OPEN_REDUX_DIALOG'})
+    };
+  };
+
+  function mapStateToProps(state) {
+    return {
+        open: state.closeReduxDialog.open,
+     };
+    }
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -144,18 +159,22 @@ render() {
     <FlatButton label="Edit" primary={true} keyboardFocused={true} onClick={e => this.handleSubmitEdit(e)} />,
     <FlatButton label="Cancel" primary={true} onClick={this.handleCloseEdit} />
   ];
+  const actionsRedux = [
+    <FlatButton label="OK" primary={true} onClick={this.props.closeReduxDialog} />
+  ];
+
   const actionsAlert = [ <FlatButton label="Ok, got it!" primary={true} onClick={this.handleCloseAlert} /> ];
 
     return (
       <div>
         <AddButton onClick={this.handleOpen} />
-        <StartForm />
+        <StartDialog />
         <AddTaskDialog onSubmit={this.handleSubmit} open={this.state.open} />
         <TableTasks handleDelete={this.handleDelete} handleEdit={this.handleEdit} data={this.state.data} 
         header={[{ name: "No"}, { name: "Task" }, { name: "Deadline" }, {name: "Timer"}, { name: "Priority" }, { name: "Edit" }, { name: "Delete" }]} />
         {/* Edit form */}
         <form>
-          <Dialog title="Edit your Task" open={this.state.openEdit} actions={actions}>
+          <Dialog title="Edit your Task" open={this.state.openEdit} actions={actions} >
             <TextField floatingLabelText="Task" value={this.state.nameTask} errorText={this.state.nameTaskError}
             onChange={e => this.handleTextFieldChange(e)}  
             onKeyPress={this.handleKeyPress} />
@@ -170,11 +189,15 @@ render() {
           alertStatement={"Time to complete the task has already passed. Change the date or keep current one."}/>
         </form>
         <RaisedButton label="More features" className='BtnBottom' fullWidth={true} href="/more-features" />
+        {/* Redux part */}
+        <RaisedButton label="Try Redux" className='BtnBottomHigher' fullWidth={true} onClick={this.props.openReduxDialog}/>
+        <Dialog title="this component has been supported by redux." open={this.props.open} actions={actionsRedux}></Dialog>  
       </div>
     );
   }}
+const HomeMain = connect(mapStateToProps, mapDispatchToProps)(Home);
 
-export default Home;
+export default HomeMain;
 // Proptypes
 Home.propTypes = {
   priority: PropTypes.string,
