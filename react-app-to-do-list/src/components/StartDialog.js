@@ -8,22 +8,25 @@ import { connect } from "react-redux";
 
 const mapDispatchToProps = dispatch => {
     return {
-        checkPassword: () => dispatch({type: 'CHECK_PASSWORD'})
+        checkPassword: () => dispatch({type: 'CHECKED_PASSWORD'})
     };
   };
+
+  function mapStateToProps(state) {
+    return {
+        open: state.checkPassword.open,
+        errorText: state.checkPassword.errorText
+     };
+    }
 
 class StartDialog extends Component {
     constructor(props) {
         super(props);
-        this.state = { errorText: '', open: true };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
       }
      
       handleSubmit = event => {
         let password = this.refs.myPasswordValue.input.value;
     
-        this.props.checkPassword();
     // Check default password
           if(password === "123"){
                 this.setState({ errorText: '', open: false });
@@ -50,13 +53,13 @@ class StartDialog extends Component {
       }
 
 render() {
-    const actions = [ <FlatButton label="Submit" primary={true} onClick={this.handleSubmit} /> ];
+    const actions = [ <FlatButton label="Submit" primary={true} onClick={this.props.checkPassword} /> ];
 
     return (
-            <Dialog title="Welcome to the React App!" actions={actions} modal={true} open={this.state.open} >
+            <Dialog title="Welcome to the React App!" actions={actions} modal={true} open={this.props.open} >
                 <p className="StartDialog-subheader">To use the application it is necessary to enter the password.<br/>
                 (default password: 123)</p>
-                <TextField errorText={this.state.errorText}
+                <TextField errorText={this.props.errorText}
                 hintText="Password Field" 
                 floatingLabelText="Password" 
                 type="password" 
@@ -67,8 +70,7 @@ render() {
   }
 }
 
-const StartForm = connect(null, mapDispatchToProps)(StartDialog);
-
+const StartForm = connect(mapStateToProps, mapDispatchToProps)(StartDialog);
 // Proptypes
 StartDialog.propTypes = {
     errorText: PropTypes.string,
